@@ -4,14 +4,8 @@
 
 ## TODO
 
-- [ ] Add a reference for your blocks here
-- [ ] Add "icon.png" image (300x200) in the root folder
-- [ ] Add "- beta" to the GitHub project description if you are still iterating it.
-- [ ] Turn on your automated build on https://travis-ci.org
-- [ ] Use "pxt bump" to create a tagged release on GitHub
-- [ ] Get your package reviewed and approved https://makecode.microbit.org/packages/approval
+-  Add a reference for my blocks here
 
-Read more at https://makecode.microbit.org/packages/build-your-own
 
 ## License
 
@@ -19,9 +13,18 @@ MIT License
 
 See License-file
 
+Copyright (c) 2018 - 2019 Banbury, Ingo Hoffmann & Michael Klein
+
+Original code from https://github.com/Banbury/pxt-calliope-oled96 Thanks to Banbury for the great work!
+MIT License Copyright (c) 2018 Banbury
+Thanks to Supereugen for ExtendedCharactersCode. That saved a lot of work!
+https://github.com/SuperEugen/pxt-calliope-grove-ssd1327/blob/master/pxt-calliope-grove-ssd1327.ts
+MIT License Copyright (c) 2018 Ingo Hoffmann
+initdisplaycodes from https://gist.githubusercontent.com/pulsar256/564fda3b9e8fc6b06b89/raw/4bb559d4088e42f7b4859a8533be920434818617/ssd1306_init.c
+Changes by kleinswelt 13.08.2019
+MIT License Copyright (c) 2019 Michael Klein
+
 ## Supported targets
 
 * for PXT/microbit
 * for PXT/calliope
-
-
