@@ -15,7 +15,9 @@ Read more at https://makecode.microbit.org/packages/build-your-own
 
 ## License
 
+MIT License
 
+See License-file
 
 ## Supported targets
 
