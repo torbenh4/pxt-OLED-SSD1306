@@ -13,8 +13,8 @@
 //% color=#9F79EE icon="\uf108" block="SSD1306 OLED"
 namespace oledssd1306 {
     /**
-     * Resets the display and clears it.
-     * Should be used at the start of the program.
+     * Setzt das Display zurück und löscht es.
+     * Sollte beim Start des Programms verwendet werden.
      */
     //% blockId=oledssd1306_init_display
     //% block="initialisiere Display"
@@ -47,7 +47,7 @@ namespace oledssd1306 {
     }
 
     /**
-     * Clears the whole display.
+     * Löscht das gesamte Display.
      */
     //% blockId=oledssd1306_clear_display
     //% block="lösche Display"
@@ -67,8 +67,8 @@ namespace oledssd1306 {
     }
 
     /**
-     * Clears a range of characters, beginning from the current
-     * cursor position.
+     * Löscht einen Buchstabenbereich beginnend an der
+     * Cursorposition.
      * @param n Number of characters to delete
      */
     //% blockId=oledssd1306_clear_range
@@ -82,8 +82,8 @@ namespace oledssd1306 {
     /**
      * Bewegt den Cursor an eine neue Position.
      */
-    //% row.min=0 row.max=8 
-    //% column.min=0 column.max=16
+    //% row.min=0 row.max=7 
+    //% column.min=0 column.max=15
     //% blockId=oledssd1306_set_text
     //% block="setze Cursor auf Zeile %row| und Spalte %column"
     export function setTextXY(row: number, column: number) {
@@ -125,7 +125,7 @@ namespace oledssd1306 {
     }
 
     /**
-     * Writes a string to the display at the current cursor position.
+     * Schreibt einen String an der aktuellen Cursorposition auf das Display.
      */
     //% blockId=oledssd1306_write_string
     //% block="schreibe %s|auf das Display"
@@ -154,7 +154,7 @@ namespace oledssd1306 {
     }
 
     /**
-     * Dreht die Schrift auf den Kopf.
+     * Dreht den Displayinhalt auf den Kopf.
      */
     //% blockId=oledssd1306_flip_screen advanced=true
     //% block="drehe Display"
@@ -169,26 +169,9 @@ namespace oledssd1306 {
         cmd(DISPLAY_ON);
     }
 
+   
     /**
-     * Changes the brightness of the display. Values range from 0 to 255.
-     */
-    //% blockId=oled96_set_brightness
-    //% brightness.min=0 brightness.max=255
-    //% block="setze Helligkeit auf %brightness"
-    export function setDisplayBrightness(brightness: number) {
-        let b = brightness
-        if (b < 0) {
-            b = 0;
-        }
-        if (b > 255) {
-            b = 255;
-        }
-        cmd(0x81);
-        cmd(b);
-    }
-
-    /**
-     * Turns the display off.
+     * Schaltet das Display aus.
      */
     //% blockId=oled96_turn_off advanced=true
     //% block="Display ausschalten"
@@ -212,9 +195,11 @@ namespace oledssd1306 {
      * a line of the character. The eight bits of each byte
      * represent the pixels of a line of the character.
      * Ex. "\x00\xFF\x81\x81\x81\xFF\x00\x00"
+     * Only use in Javascriptmode! In Blockmode Makecode adds
+     * extra backslashes.
      */
     //% blockId=oled96_write_custom_char advanced=true
-    //% block="schreibe eigenes Zeichen %c"
+ 
     export function writeCustomChar(c: string) {
         for (let i = 0; i < 8; i++) {
             writeData(c.charCodeAt(i));
@@ -222,11 +207,8 @@ namespace oledssd1306 {
     }
 
     /**
-     * Sends a command to the display.
-     * Only use this, if you know what you are doing.
-     * 
-     * For valid commands refer to the documentation of
-     * the SSD1308.
+     * Sendet einen Befehl an das Display.
+     * Nur verwenden wenn du weißt was du tust!
      */
     //% blockId=oled96_send_command advanced=true
     //% block="sende Befehl %c|an Display"
@@ -235,8 +217,8 @@ namespace oledssd1306 {
     }
 
     /**
-     * Writes a byte to the display.
-     * Could be used to directly paint to the display.
+     * Schreibt ein Byte auf das Display.
+     * Kann verwendet werden um das Display direkt zu beschreiben.
      */
     //% blockId=oled96_write_data advanced=true
     //% block="sende Datenbyte %n|an Display"
