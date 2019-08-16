@@ -136,6 +136,15 @@ namespace oledssd1306 {
     }
 
     /**
+      * Schreibt eine Zahl an der aktuellen Cursorposition auf das Display.
+      */
+    //% blockId=oledssd1306_write_number
+    //% block="schreibe Zahl %n|auf das Display"
+    export function writeNumber(n: number) {
+        oledssd1306.writeString("" + n)
+   }
+
+    /**
      * Ändert das Display zu weißer Schrift auf schwarzem Hintergrund.
      */
     //% blockId=oledssd1306_normal_display advanced=true
@@ -169,7 +178,7 @@ namespace oledssd1306 {
         cmd(DISPLAY_ON);
     }
 
-   
+
     /**
      * Schaltet das Display aus.
      */
@@ -199,7 +208,7 @@ namespace oledssd1306 {
      * extra backslashes.
      */
     //% blockId=oled96_write_custom_char advanced=true
- 
+    //% block="schreibe eigenes Zeichen %c"
     export function writeCustomChar(c: string) {
         for (let i = 0; i < 8; i++) {
             writeData(c.charCodeAt(i));
