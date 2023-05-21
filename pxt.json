@@ -3,8 +3,7 @@
     "version": "0.0.5",
     "description": "Driver for I2C SSD1306/SSD1308 OLED-Displays with german Characters extension",
     "dependencies": {
-        "core": "*",
-        "radio": "*"
+        "core": "*"
     },
     "files": [
         "README.md",
@@ -13,5 +12,13 @@
     "testFiles": [
         "test.ts"
     ],
-    "public": false
+    "public": false,
+    "targetVersions": {
+        "target": "4.0.29",
+        "targetId": "calliopemini"
+    },
+    "supportedTargets": [
+        "calliopemini"
+    ],
+    "preferredEditor": "tsprj"
 }
