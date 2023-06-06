@@ -1,6 +1,6 @@
 {
     "name": "pxt-oled-ssd1306",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "Driver for I2C SSD1306/SSD1308 OLED-Displays with german Characters extension",
     "dependencies": {
         "core": "*"
@@ -12,13 +12,5 @@
     "testFiles": [
         "test.ts"
     ],
-    "public": false,
-    "targetVersions": {
-        "target": "4.0.29",
-        "targetId": "calliopemini"
-    },
-    "supportedTargets": [
-        "calliopemini"
-    ],
-    "preferredEditor": "tsprj"
+    "public": false
 }
