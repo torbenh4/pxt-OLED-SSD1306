@@ -1,6 +1,6 @@
 {
     "name": "pxt-oled-ssd1306",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Driver for I2C SSD1306 OLED-Displays with german Characters extension",
     "dependencies": {
         "core": "*"
