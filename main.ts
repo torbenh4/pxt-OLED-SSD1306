@@ -212,6 +212,7 @@ namespace oledssd1306 {
     export function writeCustomChar(c: string) {
         for (let i = 0; i < 8; i++) {
             writeData(c.charCodeAt(i));
+            writeData(c.charCodeAt(i));
         }
     }
 
