@@ -11,12 +11,12 @@
 // MIT License Copyright (c) 2019 Michael Klein
 
 //% color=#9FEE9E icon="\uf108" block="SSD1306 OLED torbenh"
-namespace oledssd1306 {
+namespace oledssd1306t {
     /**
      * Setzt das Display zurück und löscht es.
      * Sollte beim Start des Programms verwendet werden.
      */
-    //% blockId=oledssd1306_init_display
+    //% blockId=oledssd1306t_init_display
     //% block="initialisiere Display"
     // initdisplaycodes from https://gist.githubusercontent.com/pulsar256/564fda3b9e8fc6b06b89/raw/4bb559d4088e42f7b4859a8533be920434818617/ssd1306_init.c
     export function initDisplay(): void {
@@ -49,7 +49,7 @@ namespace oledssd1306 {
     /**
      * Löscht das gesamte Display.
      */
-    //% blockId=oledssd1306_clear_display
+    //% blockId=oledssd1306t_clear_display
     //% block="lösche Display"
     export function clearDisplay() {
         cmd(DISPLAY_OFF);   //display off
@@ -71,7 +71,7 @@ namespace oledssd1306 {
      * Cursorposition.
      * @param n Number of characters to delete
      */
-    //% blockId=oledssd1306_clear_range
+    //% blockId=oledssd1306t_clear_range
     //% block="lösche %n| Zeichen"
     export function clearRange(n: number) {
         for (let i = 0; i < n; i++) {
@@ -84,7 +84,7 @@ namespace oledssd1306 {
      */
     //% row.min=0 row.max=7 
     //% column.min=0 column.max=15
-    //% blockId=oledssd1306_set_text
+    //% blockId=oledssd1306t_set_text
     //% block="setze Cursor auf Zeile %row| und Spalte %column"
     export function setTextXY(row: number, column: number) {
         let r = row;
@@ -127,7 +127,7 @@ namespace oledssd1306 {
     /**
      * Schreibt einen String an der aktuellen Cursorposition auf das Display.
      */
-    //% blockId=oledssd1306_write_string
+    //% blockId=oledssd1306t_write_string
     //% block="schreibe %s|auf das Display"
     export function writeString(s: string) {
         for (let c of s) {
@@ -138,7 +138,7 @@ namespace oledssd1306 {
     /**
       * Schreibt eine Zahl an der aktuellen Cursorposition auf das Display.
       */
-    //% blockId=oledssd1306_write_number
+    //% blockId=oledssd1306t_write_number
     //% block="schreibe Zahl %n|auf das Display"
     export function writeNumber(n: number) {
         oledssd1306.writeString("" + n)
@@ -147,7 +147,7 @@ namespace oledssd1306 {
     /**
      * Ändert das Display zu weißer Schrift auf schwarzem Hintergrund.
      */
-    //% blockId=oledssd1306_normal_display advanced=true
+    //% blockId=oledssd1306t_normal_display advanced=true
     //% block="weiss auf schwarz"
     export function normalDisplay() {
         cmd(NORMAL_DISPLAY);
@@ -156,7 +156,7 @@ namespace oledssd1306 {
     /**
      * Ändert das Display zu schwarzer Schrift auf weißem Hintergrund.
      */
-    //% blockId=oledssd1306_invert_display advanced=true
+    //% blockId=oledssd1306t_invert_display advanced=true
     //% block="schwarz auf weiss"
     export function invertDisplay() {
         cmd(INVERT_DISPLAY);
@@ -165,7 +165,7 @@ namespace oledssd1306 {
     /**
      * Dreht den Displayinhalt auf den Kopf.
      */
-    //% blockId=oledssd1306_flip_screen advanced=true
+    //% blockId=oledssd1306t_flip_screen advanced=true
     //% block="drehe Display"
     export function flipScreen() {
         cmd(DISPLAY_OFF);
@@ -182,7 +182,7 @@ namespace oledssd1306 {
     /**
      * Schaltet das Display aus.
      */
-    //% blockId=oled96_turn_off advanced=true
+    //% blockId=oled96ssd1306t_turn_off advanced=true
     //% block="Display ausschalten"
     export function turnOff() {
         cmd(DISPLAY_OFF);
@@ -191,7 +191,7 @@ namespace oledssd1306 {
     /**
      * Turns the display on.
      */
-    //% blockId=oled96_turn_on advanced=true
+    //% blockId=oled961306t_turn_on advanced=true
     //% block="Display anschalten"
     export function turnOn() {
         cmd(DISPLAY_ON);
@@ -207,7 +207,7 @@ namespace oledssd1306 {
      * Only use in Javascriptmode! In Blockmode Makecode adds
      * extra backslashes.
      */
-    //% blockId=oled96_write_custom_char advanced=true
+    //% blockId=oled961306t_write_custom_char advanced=true
     //% block="schreibe eigenes Zeichen %c"
     export function writeCustomChar(c: string) {
         for (let i = 0; i < 8; i++) {
@@ -220,7 +220,7 @@ namespace oledssd1306 {
      * Sendet einen Befehl an das Display.
      * Nur verwenden wenn du weißt was du tust!
      */
-    //% blockId=oled96_send_command advanced=true
+    //% blockId=oled961306t_send_command advanced=true
     //% block="sende Befehl %c|an Display"
     export function cmd(c: number) {
         pins.i2cWriteNumber(0x3c, c, NumberFormat.UInt16BE);
@@ -230,7 +230,7 @@ namespace oledssd1306 {
      * Schreibt ein Byte auf das Display.
      * Kann verwendet werden um das Display direkt zu beschreiben.
      */
-    //% blockId=oled96_write_data advanced=true
+    //% blockId=oled961306t_write_data advanced=true
     //% block="sende Datenbyte %n|an Display"
     export function writeData(n: number) {
         let b = n;
