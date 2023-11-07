@@ -10,7 +10,7 @@
 // Changes by kleinswelt 13.08.2019
 // MIT License Copyright (c) 2019 Michael Klein
 
-//% color=#9F79EE icon="\uf108" block="SSD1306 OLED"
+//% color=#9FEE9E icon="\uf108" block="SSD1306 OLED torbenh"
 namespace oledssd1306 {
     /**
      * Setzt das Display zurück und löscht es.
