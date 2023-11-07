@@ -141,7 +141,7 @@ namespace oledssd1306t {
     //% blockId=oledssd1306t_write_number
     //% block="schreibe Zahl %n|auf das Display"
     export function writeNumber(n: number) {
-        oledssd1306.writeString("" + n)
+        oledssd1306t.writeString("" + n)
    }
 
     /**
