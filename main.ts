@@ -58,7 +58,7 @@ namespace oledssd1306t {
             {
                 for (let i = 0; i < 8; i++)  //clear all columns
                 {
-                    putChar(' ');
+                    putChar(' ', 0);
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace oledssd1306t {
     //% block="lösche %n| Zeichen"
     export function clearRange(n: number) {
         for (let i = 0; i < n; i++) {
-            putChar(' ');
+            putChar(' ', 0);
         }
     }
 
