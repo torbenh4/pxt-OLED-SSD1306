@@ -86,7 +86,7 @@ namespace oledssd1306t {
     //% column.min=0 column.max=15
     //% blockId=oledssd1306t_set_text
     //% block="setze Cursor auf Zeile %row| und Spalte %column"
-    export function setTextXY(row: number, column: number, half: number) {
+    export function setTextXY(row: number, column: number) {
         let r = row;
         let c = column;
         if (row < 0) { r = 0 }
@@ -201,15 +201,15 @@ namespace oledssd1306t {
 	    let ret = 0;
 
 	    if (half == 0) {
-		    if (number & 0x1) { ret |= 0x3; }
-		    if (number & 0x2) { ret |= 0xc; }
-		    if (number & 0x4) { ret |= 0x30; }
-		    if (number & 0x8) { ret |= 0xc0; }
+		    if (hex & 0x1) { ret |= 0x3; }
+		    if (hex & 0x2) { ret |= 0xc; }
+		    if (hex & 0x4) { ret |= 0x30; }
+		    if (hex & 0x8) { ret |= 0xc0; }
 	    } else {
-		    if (number & 0x10) { ret |= 0x3; }
-		    if (number & 0x20) { ret |= 0xc; }
-		    if (number & 0x40) { ret |= 0x30; }
-		    if (number & 0x80) { ret |= 0xc0; }
+		    if (hex & 0x10) { ret |= 0x3; }
+		    if (hex & 0x20) { ret |= 0xc; }
+		    if (hex & 0x40) { ret |= 0x30; }
+		    if (hex & 0x80) { ret |= 0xc0; }
 	    }
 
 	    return ret;
