@@ -53,10 +53,10 @@ namespace oledssd1306t {
     //% block="lösche Display"
     export function clearDisplay() {
         cmd(DISPLAY_OFF);   //display off
-        for (let j = 0; j < 8; j++) {
+        for (let j = 0; j < 4; j++) {
             setTextXY(j, 0);
             {
-                for (let i = 0; i < 16; i++)  //clear all columns
+                for (let i = 0; i < 8; i++)  //clear all columns
                 {
                     putChar(' ');
                 }
@@ -86,40 +86,40 @@ namespace oledssd1306t {
     //% column.min=0 column.max=15
     //% blockId=oledssd1306t_set_text
     //% block="setze Cursor auf Zeile %row| und Spalte %column"
-    export function setTextXY(row: number, column: number) {
+    export function setTextXY(row: number, column: number, half: number) {
         let r = row;
         let c = column;
         if (row < 0) { r = 0 }
         if (column < 0) { c = 0 }
-        if (row > 7) { r = 7 }
-        if (column > 15) { c = 15 }
+        if (row > 3) { r = 3 }
+        if (column > 7) { c = 7 }
 
         cmd(0xB0 + r);            //set page address
-        cmd(0x00 + (8 * c & 0x0F));  //set column lower address
-        cmd(0x10 + ((8 * c >> 4) & 0x0F));   //set column higher address
+        cmd(0x00 + (16 * c & 0x0F));  //set column lower address
+        cmd(0x10 + ((16 * c >> 4) & 0x0F));   //set column higher address
     }
 
     /**
      * Writes a single character to the display.
      */
-    function putChar(c: string) {
+    function putChar(c: string, half: number) {
         let c1 = c.charCodeAt(0);
         switch (c1) {
-            case 196: writeCustomChar(extendedCharacters[0]); break;
-            case 214: writeCustomChar(extendedCharacters[1]); break;
-            case 220: writeCustomChar(extendedCharacters[2]); break;
-            case 228: writeCustomChar(extendedCharacters[3]); break;
-            case 246: writeCustomChar(extendedCharacters[4]); break;
-            case 252: writeCustomChar(extendedCharacters[5]); break;
-            case 223: writeCustomChar(extendedCharacters[6]); break;
-            case 172: writeCustomChar(extendedCharacters[7]); break;
-            case 176: writeCustomChar(extendedCharacters[8]); break;
+            case 196: writeCustomChar(extendedCharacters[0], half); break;
+            case 214: writeCustomChar(extendedCharacters[1], half); break;
+            case 220: writeCustomChar(extendedCharacters[2], half); break;
+            case 228: writeCustomChar(extendedCharacters[3], half); break;
+            case 246: writeCustomChar(extendedCharacters[4], half); break;
+            case 252: writeCustomChar(extendedCharacters[5], half); break;
+            case 223: writeCustomChar(extendedCharacters[6], half); break;
+            case 172: writeCustomChar(extendedCharacters[7], half); break;
+            case 176: writeCustomChar(extendedCharacters[8], half); break;
             default:
                 if (c1 < 32 || c1 > 127) //Ignore non-printable ASCII characters. This can be modified for multilingual font.
                 {
-                    writeCustomChar("\x00\xFF\x81\x81\x81\xFF\x00\x00");
+                    writeCustomChar("\x00\xFF\x81\x81\x81\xFF\x00\x00", half);
                 } else {
-                    writeCustomChar(basicFont[c1 - 32]);
+                    writeCustomChar(basicFont[c1 - 32], half);
                 }
         }
     }
@@ -129,9 +129,9 @@ namespace oledssd1306t {
      */
     //% blockId=oledssd1306t_write_string
     //% block="schreibe %s|auf das Display"
-    export function writeString(s: string) {
+    export function writeString(s: string, half: number) {
         for (let c of s) {
-            putChar(c);
+            putChar(c, half);
         }
     }
 
@@ -139,9 +139,9 @@ namespace oledssd1306t {
       * Schreibt eine Zahl an der aktuellen Cursorposition auf das Display.
       */
     //% blockId=oledssd1306t_write_number
-    //% block="schreibe Zahl %n|auf das Display"
-    export function writeNumber(n: number) {
-        oledssd1306t.writeString("" + n)
+    //% block="schreibe Zahl %n|auf das Display (half %half|)"
+    export function writeNumber(n: number, half: number ) {
+        oledssd1306t.writeString("" + n, half)
    }
 
     /**
@@ -197,6 +197,23 @@ namespace oledssd1306t {
         cmd(DISPLAY_ON);
     }
 
+    function doubleheight(hex: number, half: number) {
+	    let ret = 0;
+
+	    if (half == 0) {
+		    if (number & 0x1) { ret |= 0x3; }
+		    if (number & 0x2) { ret |= 0xc; }
+		    if (number & 0x4) { ret |= 0x30; }
+		    if (number & 0x8) { ret |= 0xc0; }
+	    } else {
+		    if (number & 0x10) { ret |= 0x3; }
+		    if (number & 0x20) { ret |= 0xc; }
+		    if (number & 0x40) { ret |= 0x30; }
+		    if (number & 0x80) { ret |= 0xc0; }
+	    }
+
+	    return ret;
+    }
     /**
      * Writes a custom character to the display
      * at the current cursor position.
@@ -209,10 +226,10 @@ namespace oledssd1306t {
      */
     //% blockId=oled961306t_write_custom_char advanced=true
     //% block="schreibe eigenes Zeichen %c"
-    export function writeCustomChar(c: string) {
+    export function writeCustomChar(c: string, half: number) {
         for (let i = 0; i < 8; i++) {
-            writeData(c.charCodeAt(i));
-            writeData(c.charCodeAt(i));
+            writeData(doubleheight(c.charCodeAt(i), half));
+            writeData(doubleheight(c.charCodeAt(i), half));
         }
     }
 
